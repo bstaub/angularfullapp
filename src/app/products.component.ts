@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductsService} from './products.service';
 
 @Component({
@@ -7,16 +7,19 @@ import {ProductsService} from './products.service';
   styleUrls: ['products.component.css']
 })
 
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
   productName = 'a book';
   isDisabled = true;
   products = [];
   constructor(private productsService: ProductsService) {
-     this.products = this.productsService.getProducts();
      setTimeout(() => {
        // this.productName = 'after 3 seconds a tree appears!';
        this.isDisabled = false;
      }, 3000);
+  }
+
+  ngOnInit() {
+    this.products = this.productsService.getProducts();
   }
 
   onAddProduct(form) {
