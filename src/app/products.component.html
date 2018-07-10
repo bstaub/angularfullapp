@@ -1,5 +1,6 @@
 <h1>My Products</h1>
 <input *ngIf="!isDisabled" type="text" [(ngModel)]="productName">
 <button *ngIf="!isDisabled" (click)="onAddProduct()">Add Product</button>
-<div *ngFor="let product of products">{{ product }}</div>
+<app-product *ngFor="let product of products" [productName]="product"></app-product>
+
 
