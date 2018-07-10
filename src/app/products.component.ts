@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {ProductsService} from './products.service';
 
 @Component({
   selector: 'app-products',
@@ -9,8 +10,9 @@ import {Component} from '@angular/core';
 export class ProductsComponent {
   productName = 'a book';
   isDisabled = true;
-  products = ['A Book', 'A Tree'];
-  constructor() {
+  products = [];
+  constructor(private productsService: ProductsService) {
+     this.products = this.productsService.getProducts();
      setTimeout(() => {
        // this.productName = 'after 3 seconds a tree appears!';
        this.isDisabled = false;
@@ -21,6 +23,7 @@ export class ProductsComponent {
     // this.products.push(this.productName);
     if (form.valid) {
       this.products.push(form.value.productName);
+      this.productsService.addProduct(form.value.productName);
     }
     console.log(form);
   }
